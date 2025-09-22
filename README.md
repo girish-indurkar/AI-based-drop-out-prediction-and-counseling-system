@@ -27,8 +27,7 @@ This system employs AI to identify students who are at risk of dropping out by e
 - [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
-- [Author/Acknowledgements](#authoracknowledgements)
-- [Contact](#contact)
+
 
 <!-- TODO: Add screenshots if applicable -->
 
