@@ -24,8 +24,7 @@ This system employs AI to identify students who are at risk of dropping out by e
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage / Getting Started](#usage--getting-started)
-- [Configuration](#configuration)
-- [Contributing](#contributing)
+- [Demo](#demo)
 - [License](#license)
 
 
@@ -96,9 +95,12 @@ This system employs AI to identify students who are at risk of dropping out by e
 <!-- TODO: Add details about building the project (if applicable) -->
 <!-- TODO: Add details about running tests (if applicable) -->
 
-## Configuration
+## Demo
 
-<!-- TODO: Add details about any configuration options (e.g., environment variables) -->
+<img width="1920" height="1020" alt="Screenshot 2025-09-22 184947" src="https://github.com/user-attachments/assets/f03ce58e-9326-4664-866c-5370d27df8c0" />
+<img width="1920" height="1020" alt="Screenshot 2025-09-22 185001" src="https://github.com/user-attachments/assets/f66454fc-912e-4f8a-b45d-9939284c16e6" />
+<img width="1920" height="1020" alt="Screenshot 2025-09-22 185030" src="https://github.com/user-attachments/assets/846d26fb-9a6e-4b1d-9fed-536ea56f36de" />
+
 
 ## Contributing
 
