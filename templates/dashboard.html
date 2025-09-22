@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen text-gray-800 dark:text-gray-200 transition">
+  <div class="container mx-auto py-6 px-4">
+
+    <!-- Top bar -->
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold">High Risk Student Dashboard</h1>
+      <button onclick="toggleDarkMode()" class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">
+        Toggle Dark/Light
+      </button>
+    </div>
+
+    <!-- Student Info -->
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 mb-8">
+      <h3 class="text-2xl font-semibold text-indigo-700 dark:text-indigo-400">{{ student.Name }}</h3>
+      <p class="mt-2">
+        <span class="font-semibold">Department:</span> {{ student.Stream }} |
+        <span class="font-semibold">Course:</span> {{ student.CourseName }}
+      </p>
+      <p><span class="font-semibold">Attendance:</span> {{ student.Attendance }}%</p>
+      <p><span class="font-semibold">Dropout Risk:</span> {{ student.RiskLevel }}</p>
+      <p><span class="font-semibold">Reason for Dropout:</span> {{ student.Reason }}</p>
+      <p><span class="font-semibold">Phone:</span> {{ student.PhoneNumber }}</p>
+
+      <!-- Buttons -->
+      <div class="flex space-x-4 mt-4">
+        <a href="https://wa.me/{{ student.PhoneNumber | replace('+', '') }}" target="_blank"
+           onclick="showMessage('{{ student.Name }}')"
+           class="px-4 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">
+          Send WhatsApp
+        </a>
+        <a href="sms:{{ student.PhoneNumber }}"
+           onclick="showMessage('{{ student.Name }}')"
+           class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
+          Send SMS
+        </a>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white dark:bg-gray-800 shadow-md rounded-2xl p-4">
+        <canvas id="marksChart"></canvas>
+      </div>
+      <div class="bg-white dark:bg-gray-800 shadow-md rounded-2xl p-4">
+        <canvas id="attendanceChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Marks Chart
+    const marksCtx = document.getElementById('marksChart').getContext('2d');
+    new Chart(marksCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Mid 1', 'Mid 2', 'End Sem'],
+        datasets: [{
+          label: 'Marks',
+          data: [{{ student.Mid1 }}, {{ student.Mid2 }}, {{ student.EndSem }}],
+          backgroundColor: ['#4f46e5', '#6366f1', '#818cf8']
+        }]
+      }
+    });
+
+    // Attendance Chart
+    const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+    new Chart(attendanceCtx, {
+      type: 'line',
+      data: {
+        labels: {{ student.Months | safe }},
+        datasets: [{
+          label: 'Monthly Attendance %',
+          data: {{ student.MonthlyAttendance | safe }},
+          borderColor: '#f97316',
+          backgroundColor: 'rgba(249, 115, 22, 0.3)',
+          fill: true,
+          tension: 0.3
+        }]
+      }
+    });
+
+    // Dark mode toggle
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle('dark');
+    }
+
+    // Popup message
+    function showMessage(name) {
+      alert("Message sent successfully to " + name);
+    }
+  </script>
+</body>
+</html>
